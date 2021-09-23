@@ -5,7 +5,7 @@
 - Practice getting data from mongoDB using mongoose
 - Practice inserting data to the database
 
-### Overviwe
+### Overview
 
 Previously, we set up mongoose and created our blog model schema, now it is time to interact with our database and manipulate the data.
 
