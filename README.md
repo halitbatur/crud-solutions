@@ -1,4 +1,4 @@
-## Updating data with mongoose Lab
+## Create and read data with mongoose Lab
 
 ### Objectives
 
