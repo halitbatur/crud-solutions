@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const PostModel = require('../Models/post-model');
+const PostModel = require('../models/blog-post');
 
 router.get("/posts", async (_, res) => {
     const posts = await PostModel.find();
