@@ -2,7 +2,7 @@ const db = require("./db/connection");
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const postsController = require("./controllers/blog-post");
+const blogPostsController = require("./controllers/blog-post");
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
