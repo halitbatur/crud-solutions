@@ -6,9 +6,20 @@ router.get("/blogposts", async (_, res) => {
   res.json(posts);
 });
 
-router.get("/blogposts/hashtag/:tag", async (req, res) => {
-  const { tag } = req.params;
-  const posts = await BlogPostModel.find({ tags: tag });
+router.get("/blogposts/filter", async (req, res) => {
+  const { tag, author } = req.query;
+
+  const query = {};
+  if (tag) query.tags = tag;
+  if (author) query["author.name"] = author;
+
+  if (!query.tags && !query["author.name"]) {
+    res
+      .status(400)
+      .json({ message: "make sure you send a valid query parameter" });
+  }
+
+  const posts = await BlogPostModel.find(query);
   res.json(posts);
 });
 

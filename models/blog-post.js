@@ -1,5 +1,9 @@
 const mongoose = require("mongoose");
 
+const blogAuthor = new mongoose.Schema({
+  name: { type: String, required: true },
+});
+
 const blogPost = new mongoose.Schema(
   {
     title: {
@@ -12,6 +16,7 @@ const blogPost = new mongoose.Schema(
       required: true,
     },
     tags: [String],
+    author: blogAuthor,
   },
   { timestamps: true }
 );

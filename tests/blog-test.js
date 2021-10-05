@@ -6,9 +6,33 @@ const expect = require("chai").expect;
 describe("blog posts", () => {
   let id;
 
-  it("should filter posts by tag", (done) => {
+  it("should create a new post and return it", (done) => {
+    const post = {
+      title: "A new post",
+      content: "Lorem ipsum lorem ipsum",
+      tags: ["blog", "lifestyle"],
+      author: {
+        name: "ali",
+      },
+    };
+
     request
-      .get("/hashtag/Node.js")
+      .post("/")
+      .set("Content-Type", "application/json")
+      .send(post)
+      .expect("Content-Type", /json/)
+      .expect(201, (err, res) => {
+        if (err) return done(err);
+        expect(res.body.title).to.be.a("string");
+        expect(res.body.content).to.be.a("string");
+        expect(res.body.tags).to.be.a("array");
+        done();
+      });
+  });
+
+  it("should filter posts by tag or author name", (done) => {
+    request
+      .get("/filter?tag=lifestyle&author=ali")
       .expect("Content-Type", /json/)
       .expect(200, (err, res) => {
         if (err) return done(err);
@@ -17,7 +41,8 @@ describe("blog posts", () => {
           expect(post.title).to.be.a("string");
           expect(post.content).to.be.a("string");
           expect(post.tags).to.be.a("array");
-          expect(post.tags).to.include("Node.js");
+          expect(post.tags).to.include("lifestyle");
+          expect(post.author.name).to.equal("ali");
         });
         done();
       });
@@ -40,27 +65,6 @@ describe("blog posts", () => {
       .get("/" + id)
       .expect("Content-Type", /json/)
       .expect(200, (err, res) => {
-        if (err) return done(err);
-        expect(res.body.title).to.be.a("string");
-        expect(res.body.content).to.be.a("string");
-        expect(res.body.tags).to.be.a("array");
-        done();
-      });
-  });
-
-  it("should create a new post and return it", (done) => {
-    const post = {
-      title: "A new post",
-      content: "Lorem ipsum lorem ipsum",
-      tags: ["blog", "lifestyle"],
-    };
-
-    request
-      .post("/")
-      .set("Content-Type", "application/json")
-      .send(post)
-      .expect("Content-Type", /json/)
-      .expect(201, (err, res) => {
         if (err) return done(err);
         expect(res.body.title).to.be.a("string");
         expect(res.body.content).to.be.a("string");
