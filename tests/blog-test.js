@@ -13,6 +13,9 @@ describe("blog posts", () => {
       tags: ["blog", "lifestyle"],
       author: {
         name: "ali",
+        age: 22,
+        gender: "male",
+        nationality: "Iraqi",
       },
     };
 

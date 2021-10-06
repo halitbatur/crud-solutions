@@ -1,7 +1,24 @@
 const mongoose = require("mongoose");
 
 const blogAuthor = new mongoose.Schema({
-  name: { type: String, required: true },
+  name: {
+    type: String,
+    required: true,
+    maxlength: 120,
+  },
+  age: {
+    type: Number,
+    required: true,
+  },
+  gender: {
+    type: String,
+    required: true,
+  },
+  nationality: {
+    type: String,
+    required: true,
+  },
+  areasOfExpertise: [String],
 });
 
 const blogPost = new mongoose.Schema(
