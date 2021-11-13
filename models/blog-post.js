@@ -3,36 +3,35 @@ const mongoose = require("mongoose");
 const blogAuthor = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
-    maxlength: 120,
   },
   age: {
     type: Number,
-    required: true,
   },
   gender: {
-    type: String,
-    required: true,
+    type: String
   },
   nationality: {
-    type: String,
-    required: true,
+    type: String
   },
-  areasOfExpertise: [String],
+  areasOfExpertise: {
+    type: [String]
+  }
 });
 
 const blogPost = new mongoose.Schema(
   {
     title: {
-      type: String,
-      required: true,
-      maxlength: 120,
+      type: String
     },
     content: {
-      type: String,
-      required: true,
+      type: String
     },
-    tags: [String],
+    tags: {
+      type: [String]
+    },
+    likes: {
+      type: Number
+    },
     author: blogAuthor,
   },
   { timestamps: true }
